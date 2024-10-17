@@ -3,6 +3,37 @@
     src: url('./OPTICopperplate-Heavy.otf') format('truetype'); /* Adjust path as needed */
 }
 
+@keyframes slidein{
+    from {
+        width:0;
+        opacity: 0;
+    }
+    to {
+        width:40%;
+        opacity: 1; 
+    }
+}
+
+@keyframes slidein2{
+    from {
+        width:0;
+        opacity: 0;
+    }
+    to {
+        width:100%;
+        opacity: 1; 
+    }
+}
+
+
+@keyframes fadein {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
 
 h1{
     color: antiquewhite;
@@ -21,6 +52,7 @@ body{
     justify-content:flex-start ;
     padding-top: 0%;
     align-items: stretch;
+    background-color: black;
 }
 
 .description {
@@ -33,6 +65,7 @@ body{
     width:100%;
     color: white;
     padding-left: 5%;
+    animation: slidein2 .5s ease-in-out forwards;
 }
 
 .navbar{
@@ -60,6 +93,7 @@ body{
     z-index: 1000;
     transition: width .2s;
     transition-timing-function: ease-in;
+    animation: slidein 1s ease-in-out forwards;
 }
 
 .menu_div{
@@ -84,27 +118,47 @@ body{
     padding-right: 5%;
     font-size: 1.7vw;
     font-family: 'Courier New', Courier, monospace;
+    z-index: 1000;
 }
 
 .services{
     display: flex;
     height:fit-content;
-    border: 1px solid white;
     border-radius: 25%;
+    transition: border .2s;
+    border: 0px solid transparent;
+    animation: fadein 1s ease-in-out forwards;
+}
+
+.services:hover{
+    border: 4px solid white;
 }
 
 .projects{
     display: flex;
     height:fit-content;
-    border: 1px solid white;
     border-radius: 25%;
+    transition: border .2s;
+    border: 0px solid transparent;
+    animation: fadein 1s ease-in-out forwards;
 }
+
+.projects:hover{
+    border: 4px solid white;
+}
+
 
 .contact{
     display: flex;
     height:fit-content;
-    border: 1px solid white;
     border-radius: 25%;
+    transition: border .2s;
+    border: 0px solid transparent;
+    animation: fadein 1s ease-in-out forwards;
+}
+
+.contact:hover{
+    border: 4px solid white;
 }
 
 @media screen and (max-width: 600px){
