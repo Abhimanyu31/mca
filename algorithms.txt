@@ -1,0 +1,30 @@
+1. Stack using linked list::
+            Step 1: Define the Node Structure
+            Step 2: Define the Stack Structure (Class or Structure)
+                The stack will have:
+                    A pointer (top) that points to the top of the stack (the most recently added node).
+                    Methods to perform operations on the stack: push, pop, peek, isEmpty.
+            Step 3: Initialize the Stack
+                To begin using the stack, initialize it by creating an object of the Stack class. This will automatically set the top pointer to None, indicating the stack is empty.
+            Step 4: Implement the push() Operation
+                The push operation adds a new element to the top of the stack:
+                    Create a new node with the given value.
+                    Set the new node’s next pointer to the current top node.
+                    Update the top pointer to point to the new node.
+            Step 5: Implement the pop() Operation
+                The pop operation removes the element from the top of the stack:
+                Check if the stack is empty (i.e., if top is None). If the stack is empty, throw an error (stack underflow).
+                Save the current top node in a temporary variable.
+                Update the top pointer to the next node in the stack (top.next).
+                Deallocate (delete) the old top node and return its value.
+            Step 6: Implement the peek() Operation
+                The peek operation allows you to view the value of the top element without removing it:
+
+                Check if the stack is empty (i.e., if top is None). If the stack is empty, throw an error (stack underflow).
+                Return the data of the top node.
+                                    
+
+
+
+
+
