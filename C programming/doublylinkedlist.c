@@ -9,9 +9,10 @@ void print();
 struct node{
     int data;
     struct node* next;
+    struct node* prev;
 };
 
-struct node  *newnode, *current, *temp,*head=NULL, *prev,*tail;
+struct node  *newnode, *current, *temp, *previous, *nextnode,*head=NULL;
 int num;
 void main(){
     int j,choice=0,n;
@@ -21,29 +22,26 @@ void main(){
         newnode=(struct node*)malloc(sizeof(struct node));
         printf("Enter the data:");
         scanf("%d",&newnode->data);
-        newnode->next=newnode;
-        
-        
+        newnode->next=NULL;
+        newnode->prev=NULL;
 
         if (head==NULL){
-            head=newnode; 
+            head=newnode;
+            temp=newnode;
         }
         else{
-            tail->next=newnode;
+            temp->next=newnode;
+            newnode->prev=temp;
             temp=newnode;
-            temp->next=head;
-            tail->next=head;
-            
         }
     }
 
     temp=head;
-    do
-    {
-        printf("%d ",temp->data);
-        temp=temp->next;
-    } while (temp!=head);
-
+    while(temp!=NULL)
+        {
+            printf("%d ",temp->data);
+            temp=temp->next;
+        }
 
     while(choice!=3){
         printf("What operation do you want to perform?\n1. insertion\t2. deletion");
@@ -56,7 +54,6 @@ void main(){
             case 2:
             deletion();
             print();
-            break;
         }
     }
 
@@ -69,20 +66,14 @@ void insertion(){
     printf("enter the  data ");
     scanf("%d",&newnode->data);
     newnode->next=NULL;
+    newnode->prev=NULL;
     printf("where to enter the data 1.beginning \n 2.between \n 3.end");
     scanf("%d",&p);
     switch(p){
         case 1:
-        { temp=head;
-                while(temp->next!=head)
-                    {
-                        temp=temp->next;
-
-                    }
-            temp->next=newnode;
+        {
             newnode->next=head;
             head=newnode;
-            tail->next=head;
             break;
         }
         case 2:
@@ -90,27 +81,27 @@ void insertion(){
             printf("insert the position");
             scanf("%d",&n);
             temp=head;
-            for(i=0;i<n;i++)
+            for(i=0;i<n-1;i++)
                 {
-                    prev=temp;
                     temp=temp->next;
                     
                 }
-                prev->next=newnode;
-                newnode->next=temp;
+                newnode->next=temp->next;
+                newnode->prev=temp;
+                temp->next=newnode;
             break;
         }
         case 3:
             {   
                 temp=head;
-                while(temp->next!=head)
+                while(temp->next!=NULL)
                     {
                         temp=temp->next;
 
                     }
-                    temp->next=newnode;
-                    newnode->next=head;
-                    tail=newnode;
+                temp->next=newnode;
+                newnode->next=NULL;
+                newnode->prev=temp;
                 break;
             }
 
@@ -126,17 +117,12 @@ void deletion(){
   
     printf("From where to delete the data 1.beginning \n 2.between \n 3.end");
     scanf("%d",&p);
-    tail->next=head;
     switch(p){
         case 1:
-        {while(temp->next!=head)
-                    {
-                        temp=temp->next;
-
-                    }
+        {
+            temp=head;
             head=head->next;
-            tail->next=head;
-
+            free(temp);
             break;
         }
         case 2:
@@ -144,25 +130,26 @@ void deletion(){
             printf("enter the position");
             scanf("%d",&n);
             temp=head;
-            for(i=0;i<n-1;i++)
+            for(i=0;i<n;i++)
                 {
-                    prev=temp;
                     temp=temp->next;
                     
                 }
-                prev->next=temp->next;
-                
+                previous=temp->prev;
+                nextnode=temp->next;
+                previous->next=temp->next;
+                nextnode->prev=previous;
             break;
         }
         case 3:
             {   
                 temp=head;
-                while(temp->next!=head)
-                    { 
-                        prev=temp;
+                while(temp->next!=NULL)
+                    {   
                         temp=temp->next;
                     }
-                    prev->next=head;
+                    previous=temp->prev;
+                    previous->next=NULL;
                 break;
             }
 
@@ -174,10 +161,9 @@ void deletion(){
 
 void print(){
     temp=head;
-    do
-    {
-        printf("%d ",temp->data);
-        temp=temp->next;
-    } while (temp!=head);
-    
+    while(temp!=NULL)
+        {
+            printf("%d ",temp->data);
+            temp=temp->next;
+        }
 }
