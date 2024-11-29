@@ -32,8 +32,8 @@ void main(){
             tail->next=head;
         }
     }
-    while(1){
-        printf("What operation do you want to perform?\n1. insertion\t2. deletion\t3. display");
+    while(choice!=4){
+        printf("What operation do you want to perform?\n1. insertion\t2. deletion\t3. display 4.exit");
         scanf("%d",&choice);
         switch(choice){
             case 1:
@@ -47,6 +47,8 @@ void main(){
             case 3:
             print();
             break;
+            default:
+            printf("invalid choice!!");
         }
     }
 }
