@@ -11,15 +11,15 @@ int insertion();
 int inorder(struct node *temp);
 int preorder(struct node *temp);
 int postorder(struct node *temp);
-int searching();
+int searching(key);
 
 struct node *root=NULL, *newnode, *temp, *parent;
-int choice=0,trav;
+int choice=0,trav,key;
 
 void main(){
     while(choice!=5){
         printf("\nWhich of the following functions do you want to perform on the BST: ");
-        printf("\n\t1.Insertion\n2.Searching\n3.Traversal\n4.Deletion");
+        printf("\n\t1.Insertion\n\t2.Searching\n\t3.Traversal\n\t4.Deletion\n");
         scanf("%d",&choice);
         switch (choice)
         {
@@ -28,12 +28,14 @@ void main(){
             break;
         
         case 2:
-            searching();
+            printf("\nEnter the key to be searched: ");
+            scanf("%d",&key);
+            searching(key);
             break;
 
         case 3:
             printf("Which of the following traversals do you want to perform: ");
-            printf("\n\t1.In-order\n2.pre-order\n3.postorder");
+            printf("\n\t1.In-order\n\t2.pre-order\n\t3.postorder\n");
             scanf("%d",&trav);
             if(trav==1){
                 inorder(root);
@@ -139,6 +141,18 @@ int postorder(struct node *temp){
     }
 }
 
-int searching(){
-    
+int searching(key){
+    temp=root;
+    while(temp!=NULL){
+        if(temp->data<key){
+            temp=temp->rchild;
+        }
+        else if(temp->data>key){
+            temp=temp->lchild;
+        }
+        else if(temp->data==key){
+            printf("The key is present in the tree.");
+        }
+    }
+    printf("The key is not in the BST!!");
 }
