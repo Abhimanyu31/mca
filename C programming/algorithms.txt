@@ -43,6 +43,52 @@
                     If there are more nodes, update the front pointer to point to the next node
             Step 5: Display
 
+3. Binary Search Tree:
+Step-by-Step Algorithm for Insertion in a Binary Search Tree (BST):
+        Start at the root:
+
+        If the root is None (i.e., the tree is empty), create a new node with the given value and return it as the root. This will be the base case for the recursion.
+        Compare the key (value to insert) with the current node’s value:
+
+        If the value to be inserted is less than the current node’s value, move to the left subtree of the current node.
+        If the value to be inserted is greater than or equal to the current node’s value, move to the right subtree of the current node.
+        Recursively move through the tree:
+
+        Recursively apply the insertion process on the left or right subtree, depending on the comparison result from step 2.
+        Insert at the correct position:
+
+        Continue this process until you find a None position in the tree (where a child node should be inserted).
+        Create a new node with the given value and attach it to the parent node as either the left or right child.
+        Return the updated node (root) back up the recursion stack.
+Traversal:
+        1. In-Order Traversal:
+                In this traversal, we visit the left subtree, then the root, and then the right subtree. For a BST, this traversal visits the nodes in ascending order of their values.
+
+                Algorithm (In-Order Traversal):
+                Start at the root node.
+                Recursively traverse the left subtree (go to the left child).
+                Visit the current node (process the node, e.g., print its value).
+                Recursively traverse the right subtree (go to the right child).
+                Repeat steps 2–4 for each node until all nodes are visited.
+        2. Pre-Order Traversal:
+                In this traversal, we visit the root node first, then recursively visit the left subtree, and finally the right subtree. It is useful for copying a tree or creating a clone of the tree.
+
+                Algorithm (Pre-Order Traversal):
+                Start at the root node.
+                Visit the current node (process the node, e.g., print its value).
+                Recursively traverse the left subtree (go to the left child).
+                Recursively traverse the right subtree (go to the right child).
+                Repeat steps 2–4 for each node until all nodes are visited.
+        3. Post-Order Traversal:
+                In this traversal, we first recursively visit the left subtree, then the right subtree, and finally the root node. It is useful for deleting a tree or performing cleanup operations.
+
+                Algorithm (Post-Order Traversal):
+                Start at the root node.
+                Recursively traverse the left subtree (go to the left child).
+                Recursively traverse the right subtree (go to the right child).
+                Visit the current node (process the node, e.g., print its value).
+                Repeat steps 2–4 for each node until all nodes are visited.
+
 
 
 
