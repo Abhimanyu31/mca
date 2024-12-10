@@ -12,7 +12,8 @@ int inorder(struct node *temp);
 int preorder(struct node *temp);
 int postorder(struct node *temp);
 int searching(int key);
-int deletion(struct node *temp,int key);
+struct node* deletion(struct node* root,int key);
+struct node* findMin(struct node* root);
 
 struct node *root=NULL, *newnode, *temp, *parent, *current;
 int choice=0,trav,key,max,min;
@@ -55,7 +56,7 @@ void main(){
         case 4:
             printf("\nEnter the key to be deleted: ");
             scanf("%d",&key);
-            deletion(root,key);
+            root=deletion(root,key);
             break;
         
         case 5:
@@ -167,29 +168,36 @@ int searching(int key){
     }
 }
 
-int deletion(struct node *temp,int key){
-    if(root==NULL){
-        printf("The tree is empty!!");
-    }
-    if(temp==NULL){
-        return 0;
-    }
-    if(temp->data<key){
-        deletion(temp->rchild,key);
-    }
-    else if(temp->data>key){
-        deletion(temp->lchild,key);
-    }
-    else{
-        if(temp->lchild==NULL){
-            current=temp->rchild;
-            free(temp);
-            temp=current;
-        }
-        else if(temp->rchild==NULL){
-            current=temp->lchild;
-            free(temp);
-            temp=current;
-        }
-    }
+struct node *findMin(struct node *root) {
+	while (root->lchild != NULL)
+		root = root->lchild;
+	return root;
 }
+
+struct node *deletion(struct node *root, int value) {
+	if (root == NULL) {
+		printf("Not found!\n");
+		return root;
+	}
+	
+	struct node *temp;
+	if (value < root->data) {
+		root->lchild = deletion(root->lchild, value);
+	} else if (value > root->data) {
+		root->rchild = deletion(root->rchild, value);
+	} else {
+		if (root->lchild == NULL) {
+			temp = root->rchild;
+			free(root);
+			return temp;
+		} else if (root->rchild == NULL) {
+			temp = root->lchild;
+			free(root);
+			return temp;
+		}	
+		root->data = findMin(root->rchild)->data;
+		root->rchild = deletion(root->rchild, root->data);
+	}
+	return root;
+}
+
