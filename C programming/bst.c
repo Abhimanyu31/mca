@@ -11,10 +11,11 @@ int insertion();
 int inorder(struct node *temp);
 int preorder(struct node *temp);
 int postorder(struct node *temp);
-int searching(key);
+int searching(int key);
+int deletion(struct node *temp,int key);
 
-struct node *root=NULL, *newnode, *temp, *parent;
-int choice=0,trav,key;
+struct node *root=NULL, *newnode, *temp, *parent, *current;
+int choice=0,trav,key,max,min;
 
 void main(){
     while(choice!=5){
@@ -52,7 +53,9 @@ void main(){
             break;
         
         case 4:
-            //deletion();
+            printf("\nEnter the key to be deleted: ");
+            scanf("%d",&key);
+            deletion(root,key);
             break;
         
         case 5:
@@ -141,18 +144,52 @@ int postorder(struct node *temp){
     }
 }
 
-int searching(key){
+int searching(int key){
     temp=root;
-    while(temp!=NULL){
-        if(temp->data<key){
-            temp=temp->rchild;
+    if(root==NULL){
+        printf("The tree is empty!!");
+    }
+    else{
+        while(temp!=NULL){
+            if(temp->data<key){
+                temp=temp->rchild;
+            }
+            else if(temp->data>key){
+                temp=temp->lchild;
+            }
+            else if(temp->data==key){
+                printf("The key is present in the tree.");
+                break;
+            }
         }
-        else if(temp->data>key){
-            temp=temp->lchild;
+        if(temp==NULL)
+            printf("The key is not present in the BST!!");
+    }
+}
+
+int deletion(struct node *temp,int key){
+    if(root==NULL){
+        printf("The tree is empty!!");
+    }
+    if(temp==NULL){
+        return 0;
+    }
+    if(temp->data<key){
+        deletion(temp->rchild,key);
+    }
+    else if(temp->data>key){
+        deletion(temp->lchild,key);
+    }
+    else{
+        if(temp->lchild==NULL){
+            current=temp->rchild;
+            free(temp);
+            temp=current;
         }
-        else if(temp->data==key){
-            printf("The key is present in the tree.");
+        else if(temp->rchild==NULL){
+            current=temp->lchild;
+            free(temp);
+            temp=current;
         }
     }
-    printf("The key is not in the BST!!");
 }
