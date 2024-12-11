@@ -1,0 +1,130 @@
+body,h2{
+    margin: 0;
+}
+.container{
+    height: 100vh;
+}
+
+.heading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15%;
+    transition: all ease-in 5s;
+    background-color: rgb(177, 235, 216);
+}
+
+.heading:hover{
+    animation: marquee 5s infinite;
+}
+
+h2{
+    color: black;
+}
+
+.middle_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30%;
+}
+.background{
+    display: flex;
+    position: absolute;
+    height: 30vh;
+    width: 100vw;
+    background-image: url('./css.jpg'); 
+    opacity: .5;
+    z-index:1
+}
+.image1_div{
+    display: flex;
+    position: absolute;
+    height: 30vh;
+    opacity: 1;
+    z-index: 2;
+    animation: blink 10s infinite;
+    transition: all;
+}
+.image2_div{
+    display: flex;
+    position: absolute;
+    height: 30vh;
+    opacity: 0;
+    z-index: 3;
+    animation: blink 5s infinite;
+    transition: all;
+}
+.image_div image{
+    animation: blink 5s infinite;
+}
+.last_div{
+    display: flex;
+    height: 55%;
+}
+.left_div{
+    display: flex;
+    padding-top:5%;
+    padding-left:5%;
+    width: 50vw;
+    background-color: rgb(150, 248, 248);
+    border-radius: 5%;
+    border: 5px solid white;
+    transition: all 1s ease-out;
+}
+
+.left_div:hover{
+    
+    width:60%;
+}
+
+.right_div{
+    padding-top:5%;
+    padding-left:5%;
+    width: 50vw;
+    background-color: rgb(91, 138, 138);
+    border-radius: 5%;
+    border: 5px solid white;
+    transition: all 1s ease-out;
+}
+
+.right_div:hover{
+    
+    width:60%;
+}
+
+@keyframes blink {
+    0%{
+        opacity:1
+    }
+    50%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes marquee {
+    0%{
+        transform: translate(0px);
+    }
+    25%{
+        transform: translate(-200px);
+    }
+    50%{
+        transform: translate(0px);
+    }
+    75%{
+        transform: translate(200px);
+    }
+    100%{
+        transform: translate(0px);
+    }
+}
+
+@keyframes sizein {
+    100%{
+        width:60%;
+    }
+}
