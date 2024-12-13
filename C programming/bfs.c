@@ -24,7 +24,8 @@ void enqueue(int arr[], int k) {
 int dequeue(int arr[]) {
     int item;
     if (front == -1 || front > rear) {
-        empty = 1;  // Queue is empty
+        // Queue is empty
+        empty = 1;  
         return -1;
     } else {
         item = arr[front];
@@ -35,22 +36,29 @@ int dequeue(int arr[]) {
 
 void bfs(int startnode){
     int next;
-    enqueue(queue,startnode);
+    next=startnode;
+    printf("%d->",startnode);
     visited[startnode]=1;
+    // Start with the initial node in the queue
+    enqueue(queue, next); 
 
-    while(empty!=1){
-        next=dequeue(queue);
-        while(next!=-1){
-            printf("%d->",next);
+    while (empty != 1) {
+        next = dequeue(queue);
+        if (next == -1) {
+            break; 
         }
-        for(j=0;j<vertices;j++){
-            if(graph[next][j]==1){
-                enqueue(queue,j);
-                visited[j]=1;
+        
+        for(j=0; j<vertices; j++) {
+            //check if link exists between adjacent node and if they have already been visited 
+            if (graph[next][j] == 1 && visited[j] != 1) {
+                enqueue(queue, j);
+                //if visited set to 1
+                visited[j] = 1;
+                printf("%d->", j);
             }
         }
     }
-
+    printf("End\n"); // Add an "End" at the end of the traversal
 }
 
 void main(){
