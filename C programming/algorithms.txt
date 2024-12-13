@@ -90,6 +90,32 @@ Traversal:
                 Repeat steps 2–4 for each node until all nodes are visited.
 
 
+Steps for BFS Algorithm:
+        Initialize:
+        Create a queue to store the nodes to be visited.
+        Create a visited list to keep track of visited nodes to avoid revisiting them.
+        Mark the starting node as visited and enqueue it.
+        Visit the Nodes:
+        Dequeue a node from the queue.
+        Process the node (e.g., print it, store it in a list).
+        Enqueue all its unvisited neighbors and mark them as visited.
+        Repeat:
+        Continue this process until the queue is empty, meaning all reachable nodes have been visited.
 
+BFS Algorithm (in pseudocode):
+       
+        BFS(Graph, start_node):
+        Initialize an empty queue Q
+        Create a visited list (or array) to track visited nodes
+        Enqueue the start_node into Q and mark it as visited
+        
+        while Q is not empty:
+                current_node = Dequeue(Q)      // Remove the front node
+                Process the current_node       // (e.g., print it, store it, etc.)
+                
+                for each neighbor of current_node:
+                if neighbor is not visited:
+                        Mark neighbor as visited
+                        Enqueue neighbor into Q
 
 
