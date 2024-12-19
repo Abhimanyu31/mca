@@ -119,3 +119,32 @@ BFS Algorithm (in pseudocode):
                         Enqueue neighbor into Q
 
 
+Prims Algorithm:
+        Create a matrix (or an array) to represent the graph, where graph[i][j] represents the weight of the edge between vertex i and vertex j. If no edge exists, set graph[i][j] = 0.
+        Create an array key[] to store the minimum weight edge that connects each vertex to the growing MST.
+        Create an array parent[] to keep track of the MST structure. This will help reconstruct the MST at the end.
+        Use a boolean array inMST[] to track which vertices have already been included in the MST.
+        Start with an Initial Vertex:
+
+        Initialize key[startnode] = 0 for the start node, and inMST[startnode] = true to mark it as the starting point.
+        For all other vertices, initialize key[] = ∞ and inMST[] = false.
+        Main Loop to Build MST:
+
+        For each vertex v, find the vertex u that is not in the MST yet, and has the smallest edge weight (key[u]) connecting it to the vertices in the MST.
+        Include vertex u in the MST (inMST[u] = true).
+        Update the key[] values for all adjacent vertices v of u:
+        If the weight of the edge graph[u][v] is smaller than the current key[v] and v is not already in the MST, update key[v] to graph[u][v] and set parent[v] = u.
+        Repeat the Process:
+
+        Repeat the process for all vertices. Continue until all vertices are included in the MST.
+        Reconstruct the MST:
+
+        After the algorithm terminates, the parent[] array will represent the MST. The edges in the MST can be represented as parent[v] - v for each vertex v that is not the start node.
+        Edge Case:
+
+        Handle disconnected graphs: If the graph is not fully connected, Prim's algorithm will only find the MST for the connected component containing the start node.
+        Key Points to Consider:
+        Initialization: The key[] values should start as ∞ (or a very large value), except for the starting node, which is set to 0.
+        Priority Queue (Optional): For efficiency, instead of using a linear search to find the vertex with the smallest key[] value, you can use a priority queue (min-heap) to reduce the time complexity of the algorithm.
+        Edge Weights: Prim's algorithm works best with graphs where all edges have non-negative weights. If the graph has negative weights, the algorithm can still work but may require extra care.
+
