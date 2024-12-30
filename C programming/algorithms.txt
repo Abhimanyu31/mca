@@ -148,3 +148,15 @@ Prims Algorithm:
         Priority Queue (Optional): For efficiency, instead of using a linear search to find the vertex with the smallest key[] value, you can use a priority queue (min-heap) to reduce the time complexity of the algorithm.
         Edge Weights: Prim's algorithm works best with graphs where all edges have non-negative weights. If the graph has negative weights, the algorithm can still work but may require extra care.
 
+
+
+How to find MST using Kruskal’s algorithm?
+        Below are the steps for finding MST using Kruskal’s algorithm:
+
+        Sort all the edges in non-decreasing order of their weight. 
+        Pick the smallest edge. Check if it forms a cycle with the spanning tree formed so far. If the cycle is not formed, include this edge. Else, discard it. 
+        Repeat step#2 until there are (V-1) edges in the spanning tree.
+        Step 2 uses the Union-Find algorithm to detect cycles. 
+
+
+        So we recommend reading the following post as a prerequisite. 

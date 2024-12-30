@@ -5,47 +5,92 @@
 int vertices, i, j;
 int graph[SIZE][SIZE];
 int mst[SIZE][SIZE];
-int max=0;
+int key[SIZE];
+int parent[SIZE];
+int inMST[SIZE];
 
-int prims(int startnode){
-    printf("hi");
+int prims(){
+    int next, minKey;
+    
+    for (i = 0; i < vertices; i++) {
+        key[i] = 1e8;  
+        inMST[i] = 0;  
+        parent[i] = -1;
+    }
+    
+    key[0] = 0;  
+    parent[0] = -1;  
+    
+    
+    for (int count = 0; count < vertices - 1; count++) {
+        minKey = 1e8;
+        next = -1;
+        
+        // Find the vertex with the minimum key value that is not yet in MST
+        for (i = 0; i < vertices; i++) {
+            if (inMST[i] == 0 && key[i] < minKey) {
+                minKey = key[i];
+                next = i;
+            }
+        }
+        
+        // Include this vertex in MST
+        inMST[next] = 1;
+        
+        // Update the key and parent values of the adjacent vertices
+        for (i = 0; i < vertices; i++) {
+            if (graph[next][i] != 0 && inMST[i] == 0 && graph[next][i] < key[i]) {
+                key[i] = graph[next][i];
+                parent[i] = next;
+            }
+        }
+    }
+}
+
+void printMST() {
+    int totalCost = 0;
+    printf("\nMinimum Spanning Tree (MST):\n");
+    printf("Edge   Weight\n");
+    for (i = 1; i < vertices; i++) {
+        if (parent[i] != -1) {
+            printf("%d -> %d    %d\n", parent[i], i, graph[i][parent[i]]);
+            totalCost += graph[i][parent[i]];
+        }
+    }
+    printf("\nTotal Cost of MST: %d\n", totalCost);
 }
 
 int main() {
-    // Initialize the graph
     printf("Enter the number of vertices: \n");
     scanf("%d", &vertices);
 
-    // Initialize the adjacency matrix with zeros
     for (i = 0; i < vertices; i++) {
         for (j = 0; j < vertices; j++) {
-            graph[i][j] = 0; // No edges initially
+            graph[i][j] = 0;
         }
     }
 
-    // Assign edges to the graph
     int edge;
     for (i = 0; i < vertices; i++) {
-    for (j = 0; j < vertices; j++) {
-        if (i < j) { // Only ask for the upper triangle of the matrix
-            printf("\nDoes an edge exist between vertex %d and vertex %d? (if Yes, enter its weight; 0 for No): ", i, j);
-            scanf("%d", &edge);
-            if (edge != 0) {
-                graph[i][j] = edge;
-                graph[j][i] = edge;  // Undirected graph: set both directions
+        for (j = 0; j < vertices; j++) {
+            if (i < j) { 
+                printf("\nDoes an edge exist between vertex %d and vertex %d? (if Yes, enter its weight; 0 for No): ", i, j);
+                scanf("%d", &edge);
+                if (edge != 0) {
+                    graph[i][j] = edge;
+                    graph[j][i] = edge;  
+                }
             }
-        }
-        else if (i == j) { // Handle self-loops
-            printf("\nDoes a self-loop exist at vertex %d? (if Yes, enter its weight; 0 for No): ", i);
-            scanf("%d", &edge);
-            if (edge != 0) {
-                graph[i][i] = edge;  // Self-loop at vertex i
+            else if (i == j) { 
+                printf("\nDoes a self-loop exist at vertex %d? (if Yes, enter its weight; 0 for No): ", i);
+                scanf("%d", &edge);
+                if (edge != 0) {
+                    graph[i][i] = edge;  
+                }
             }
         }
     }
-}
 
-    // Printing the adjacency matrix
     printf("\nAdjacency Matrix:\n");
     for (i = 0; i < vertices; i++) {
         for (j = 0; j < vertices; j++) {
@@ -54,26 +99,9 @@ int main() {
         printf("\n");
     }
 
-    // DFS traversal call
-    int startnode;
-    printf("\nEnter the starting node for making the minimum spanning tree: ");
-    scanf("%d", &startnode);
+    prims();
     
-    // Initialize MST 
-    for (i = 0; i < vertices; i++) {
-        for (j = 0; j < vertices; j++) {
-            mst[i][j] = 0; // No edges initially
-        }
-    }
-    // Perform Prims algorithm starting from the given node
-    int mst=prims(startnode);
-    printf("\nMST:\n");
-    for (i = 0; i < vertices; i++) {
-        for (j = 0; j < vertices; j++) {
-            printf("%d ", graph[i][j]);
-        }
-        printf("\n");
-    }
-
+    printMST();
+    
     return 0;
 }
